@@ -11,9 +11,14 @@ export async function POST(req: NextRequest) {
   const updates: Record<string, string> = {
     'site.name': 'Lanrae.co.uk',
     'site.fromName': 'Lanrae.co.uk',
-    'seo.title': 'Lanrae.co.uk — AI Product Development',
-    'seo.description': 'Browse, buy, and support AI-powered products built by Lanrae. An adaptive AI desktop experience.',
-    'about.heading': 'Lanrae.co.uk · AI Product Engineer',
+    'seo.title': 'Lanrae.co.uk — Super Intelligence Product Engineering',
+    'seo.description': 'Engineering products for the Super Intelligence era — built, shipped, and supported by Lanrae on an adaptive AI desktop experience.',
+    'seo.keywords': 'Super Intelligence, SI engineering, AI products, lanrae, AI studio, artificial intelligence, tutorials',
+    'store.label': 'Featured · Engineered for SI',
+    'store.heading': 'Ship-ready SI products',
+    'about.heading': 'Lanrae.co.uk · SI Product Engineer',
+    'about.body': 'I engineer products for the Super Intelligence era — systems that reason, act, and compound capability, not just features bolted onto a chat window. I design, build, and ship them end to end, then launch them here, on a desktop you can actually drive. lanrae.co.uk is the studio, the storefront, and the changelog, all in one.',
+    'win.store.subtitle': '— SI, engineered by lanrae',
   };
 
   const results: string[] = [];

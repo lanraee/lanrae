@@ -15,9 +15,9 @@ async function getSeoMeta() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const m = await getSeoMeta();
-  const title = m['seo.title'] || 'Lanrae.co.uk — AI Product Development';
-  const description = m['seo.description'] || 'Browse, buy, and support AI-powered products built by lanrae. Tutorials, tools, and digital goods.';
-  const keywords = m['seo.keywords'] || 'AI products, AI tools, lanrae, AI studio, artificial intelligence, tutorials';
+  const title = m['seo.title'] || 'Lanrae.co.uk — Super Intelligence Product Engineering';
+  const description = m['seo.description'] || 'Browse, buy, and support Super Intelligence products built by lanrae. Tutorials, tools, and digital goods.';
+  const keywords = m['seo.keywords'] || 'Super Intelligence, SI engineering, AI products, lanrae, AI studio, artificial intelligence, tutorials';
   return {
     metadataBase: new URL('https://lanrae.co.uk'),
     title: { default: title, template: '%s | lanrae' },

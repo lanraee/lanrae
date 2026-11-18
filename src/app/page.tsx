@@ -13,8 +13,8 @@ const CONTENT_DEFAULTS: Record<string, string> = {
   'app.request.icon': '💡', 'app.request.label': 'Request',
   'app.donate.icon': '💛',  'app.donate.label': 'Support',
   'app.about.icon': 'ℹ️',   'app.about.label': 'About',
-  'store.label': 'Featured · Built with AI',
-  'store.heading': 'Ship-ready AI products',
+  'store.label': 'Featured · Engineered for SI',
+  'store.heading': 'Ship-ready SI products',
   'store.subheading': 'Own them outright, or unlock the full shelf with an Insider membership.',
   'fans.label': 'Hall of fame',
   'fans.heading': 'The people funding the future',
@@ -28,10 +28,10 @@ const CONTENT_DEFAULTS: Record<string, string> = {
   'donate.label': 'One-off tip',
   'donate.heading': 'Buy me a GPU hour ☕',
   'donate.subheading': 'Every tip goes straight into building the next product.',
-  'about.heading': 'lanrae · AI Product Engineer',
-  'about.body': 'I design, build, and ship AI-powered products end to end — then launch them here, on a desktop you can actually drive. lanrae.co.uk is the studio, the storefront, and the changelog, all in one.',
+  'about.heading': 'lanrae · SI Product Engineer',
+  'about.body': 'I engineer products for the Super Intelligence era — systems that reason, act, and compound capability, not just features bolted onto a chat window. I design, build, and ship them end to end, then launch them here, on a desktop you can actually drive. lanrae.co.uk is the studio, the storefront, and the changelog, all in one.',
   'win.store.title': 'Product Store',
-  'win.store.subtitle': '— AI, built by lanrae',
+  'win.store.subtitle': '— SI, engineered by lanrae',
   'win.fans.title': 'Top 10 Fans',
   'win.fans.subtitle': '— this month',
   'win.members.title': 'Membership',
@@ -2435,7 +2435,7 @@ export default function Desktop() {
           {c('site.name')}
         </div>
         <div style={{ fontSize: 12, color: '#7d84a6', letterSpacing: '.12em', textTransform: 'uppercase', fontWeight: 500,
-          animation: 'tagIn .5s ease .95s both' }}>AI Product Development</div>
+          animation: 'tagIn .5s ease .95s both' }}>SI Product Engineering</div>
       </div>
 
       {/* progress bar */}
@@ -2711,12 +2711,12 @@ export default function Desktop() {
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 16, fontWeight: 500, color: '#fff' }}>{app.label}</div>
                   <div style={{ fontSize: 12.5, color: 'rgba(255,255,255,.5)', marginTop: 2 }}>
-                    {app.id === 'store' ? 'AI products by lanrae' :
+                    {app.id === 'store' ? 'SI products by lanrae' :
                      app.id === 'members' ? 'Explorer · Supporter · Insider' :
                      app.id === 'fans' ? 'Top supporters this month' :
                      app.id === 'donate' ? 'Buy me a GPU hour ☕' :
                      app.id === 'profile' ? 'Your member profile & chat' :
-                     'AI Product Engineer · lanrae.co.uk'}
+                     'SI Product Engineer · lanrae.co.uk'}
                   </div>
                 </div>
                 <span style={{ color: 'rgba(255,255,255,.3)', fontSize: 20 }}>›</span>

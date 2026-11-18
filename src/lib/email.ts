@@ -91,7 +91,7 @@ function shell(inner: string): string {
         ${inner}
       </div>
       <div style="margin-top:28px;font-size:12px;color:#7d84a6;text-align:center;">
-        lanrae.co.uk · AI Product Development
+        lanrae.co.uk · SI Product Engineering
       </div>
     </div>
   </body>

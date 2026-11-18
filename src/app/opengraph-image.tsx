@@ -59,7 +59,7 @@ export default function OgImage() {
           maxWidth: 660, lineHeight: 1.5, fontWeight: 400,
           display: 'flex',
         }}>
-          Build AI-powered products. Tutorials, tools & digital goods.
+          Engineering for Super Intelligence. Tutorials, tools & digital goods.
         </div>
 
         {/* domain badge */}
