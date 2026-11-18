@@ -41,7 +41,7 @@ export default function OgImage() {
           color: '#9d90ff', textTransform: 'uppercase',
           marginBottom: 28, display: 'flex',
         }}>
-          AI PRODUCT STUDIO
+          SI PRODUCT ENGINEERING
         </div>
 
         {/* wordmark */}
