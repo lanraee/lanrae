@@ -24,10 +24,11 @@ export async function POST(request: NextRequest) {
   const country = request.headers.get('x-vercel-ip-country') || null;
   const rawCity = request.headers.get('x-vercel-ip-city') || null;
   const city = rawCity ? decodeURIComponent(rawCity) : null;
+  const path = await request.json().then(b => b?.path).catch(() => null);
 
   await prisma.pageView.create({
     data: {
-      path: '/',
+      path: typeof path === 'string' && path ? path : '/',
       country,
       city,
       browser: parseBrowser(ua),

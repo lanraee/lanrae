@@ -30,53 +30,40 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
           height: 630,
           display: 'flex',
           flexDirection: 'column',
-          background: 'linear-gradient(160deg, #05060f 0%, #080a1a 100%)',
+          background: '#15130f',
           position: 'relative',
           fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-          overflow: 'hidden',
         }}
       >
-        <div style={{
-          position: 'absolute', top: -100, left: -80,
-          width: 600, height: 600, borderRadius: '50%',
-          background: 'rgba(124,108,255,0.2)',
-          display: 'flex', filter: 'blur(55px)',
-        }} />
-        <div style={{
-          position: 'absolute', bottom: -60, right: -60,
-          width: 400, height: 400, borderRadius: '50%',
-          background: 'rgba(53,214,199,0.12)',
-          display: 'flex', filter: 'blur(50px)',
-        }} />
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 4, background: '#d9872e', display: 'flex' }} />
 
-        {/* icon chip */}
+        {/* icon chip — real per-post color, not decoration */}
         <div style={{
           margin: '64px 0 0 64px',
-          width: 96, height: 96, borderRadius: 24,
+          width: 88, height: 88, borderRadius: 3,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 48, background: gradient,
-          boxShadow: '0 20px 50px rgba(0,0,0,.35)',
+          fontSize: 44, background: gradient, border: '1px solid #322e27',
         }}>
           {icon}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', padding: '40px 64px 64px', flex: 1, justifyContent: 'flex-end' }}>
           <div style={{
-            fontSize: 15, fontWeight: 700, letterSpacing: 4, color: '#35d6c7',
-            textTransform: 'uppercase', marginBottom: 18, display: 'flex',
+            fontSize: 16, fontWeight: 500, color: '#96907f',
+            marginBottom: 18, display: 'flex',
           }}>
             {category} · lanrae.co.uk/blog
           </div>
 
           <div style={{
-            fontSize: 52, fontWeight: 800, color: '#eef1fb', lineHeight: 1.15,
+            fontSize: 52, fontWeight: 700, color: '#ede8dc', lineHeight: 1.15,
             letterSpacing: -1.5, marginBottom: 20, display: 'flex', maxWidth: 1050,
           }}>
             {title}
           </div>
 
           <div style={{
-            fontSize: 22, color: '#a7aecb', lineHeight: 1.5, display: 'flex',
+            fontSize: 22, color: '#96907f', lineHeight: 1.5, display: 'flex',
             maxWidth: 950, overflow: 'hidden',
           }}>
             {excerpt}
