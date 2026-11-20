@@ -22,6 +22,13 @@ export const CONTENT_DEFAULTS: Record<string, string> = {
   'footer.tagline': 'lanrae.co.uk — built, shipped, and maintained by one person.',
 
   // Home
+  'home.hero.slides': JSON.stringify([
+    { url: '/hero/circuit.jpg', caption: 'Engineering the circuits of Super Intelligence.' },
+    { url: '/hero/desk.jpg', caption: 'Late nights, shipped products.' },
+    { url: '/hero/neural.jpg', caption: 'Systems that reason, act, and compound capability.' },
+    { url: '/hero/solder.jpg', caption: 'Built by hand, shipped by one person.' },
+    { url: '/hero/rocket.jpg', caption: 'I build what I ship.' },
+  ]),
   'home.hero.heading': 'I build what I ship.',
   'home.hero.body': 'I engineer products for the Super Intelligence era, then sell, support, and document them here — the studio, the storefront, and the changelog, all in one place.',
   'home.hero.cta1': 'Browse the store',

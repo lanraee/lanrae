@@ -1082,7 +1082,7 @@ export default function AdminPage() {
             {/* Homepage Hero Slider */}
             {(() => {
               const key = 'home.hero.slides';
-              const raw = contentEdits[key] ?? siteContent[key] ?? '[]';
+              const raw = contentEdits[key] ?? siteContent[key] ?? CONTENT_DEFAULTS[key] ?? '[]';
               let slides: { url: string; caption?: string }[] = [];
               try {
                 const parsed = JSON.parse(raw);
