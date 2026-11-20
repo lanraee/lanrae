@@ -4,18 +4,10 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useContent } from '@/lib/useContent';
 import { PageShell, Panel, Row, Mono, Button } from '@/components/ui';
+import { HeroSlider, type HeroSlide } from '@/components/HeroSlider';
 
 type Counts = { products: number | null; minTierPrice: number | null; fans: number | null };
 type Post = { id: string; title: string; slug: string; excerpt: string | null; category: string; icon: string | null };
-
-const MANIFEST = [
-  { href: '/store', label: 'Store', desc: 'Products you can own outright, or unlock with membership.', key: 'products' as const },
-  { href: '/members', label: 'Members', desc: 'Fund what gets built next. Three tiers, real perks.', key: 'members' as const },
-  { href: '/fans', label: 'Fans', desc: 'Who’s backing the build this month.', key: 'fans' as const },
-  { href: '/request', label: 'Request a build', desc: 'Pitch what you want built next.', key: null },
-  { href: '/support', label: 'Support', desc: 'Send a one-off tip — straight into the next build.', key: null },
-  { href: '/about', label: 'About', desc: 'Who’s building this, and why.', key: null },
-];
 
 export function HomeView() {
   const { c } = useContent();
@@ -40,6 +32,29 @@ export function HomeView() {
     }).catch(() => {});
   }, []);
 
+  let heroSlides: HeroSlide[] = [];
+  try {
+    const parsed = JSON.parse(c('home.hero.slides') || '[]');
+    if (Array.isArray(parsed)) heroSlides = parsed;
+  } catch {}
+
+  const MANIFEST = [
+    { href: '/store', label: c('nav.store.label'), desc: c('home.manifest.store.desc'), key: 'products' as const },
+    { href: '/members', label: c('nav.members.label'), desc: c('home.manifest.members.desc'), key: 'members' as const },
+    { href: '/fans', label: c('nav.fans.label'), desc: c('home.manifest.fans.desc'), key: 'fans' as const },
+    { href: '/request', label: c('nav.request.label'), desc: c('home.manifest.request.desc'), key: null },
+    { href: '/support', label: c('nav.support.label'), desc: c('home.manifest.support.desc'), key: null },
+    { href: '/about', label: c('nav.about.label'), desc: c('home.manifest.about.desc'), key: null },
+  ];
+
+  const ALSO_HERE = [
+    { href: '/trove', label: c('nav.trove.label') },
+    { href: '/tools', label: c('nav.tools.label') },
+    { href: '/radio', label: c('nav.radio.label') },
+    { href: '/play', label: c('nav.play.label') },
+    { href: '/browser', label: c('nav.browser.label') },
+  ];
+
   const figureFor = (key: typeof MANIFEST[number]['key']) => {
     if (key === 'products' && counts.products !== null) return `${counts.products} shipped`;
     if (key === 'members' && counts.minTierPrice !== null) return counts.minTierPrice === 0 ? 'from free' : `from £${(counts.minTierPrice / 100).toFixed(0)}`;
@@ -49,24 +64,22 @@ export function HomeView() {
 
   return (
     <PageShell>
+      <HeroSlider slides={heroSlides} />
+
       {/* hero */}
       <section style={{ marginBottom: 56 }}>
-        <div style={{ fontSize: 13.5, color: 'var(--ash)', marginBottom: 14, fontWeight: 500, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--beacon)', display: 'inline-block' }} />
-          lanrae.co.uk — building in public
-        </div>
         <h1 style={{
           fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(34px, 6vw, 58px)',
           lineHeight: 1.08, letterSpacing: '-.015em', margin: 0, color: 'var(--paper)', maxWidth: '16ch',
         }}>
-          I build what I ship.
+          {c('home.hero.heading')}
         </h1>
         <p style={{ fontSize: 17, color: 'var(--ash)', marginTop: 18, maxWidth: '56ch', lineHeight: 1.6 }}>
-          {c('about.body') || 'I engineer products for the Super Intelligence era, then sell, support, and document them here — the studio, the storefront, and the changelog, all in one place.'}
+          {c('home.hero.body')}
         </p>
         <div style={{ display: 'flex', gap: 12, marginTop: 28, flexWrap: 'wrap' }}>
-          <Link href="/store" style={{ textDecoration: 'none' }}><Button variant="primary">Browse the store</Button></Link>
-          <Link href="/blog" style={{ textDecoration: 'none' }}><Button variant="secondary">Read the build log</Button></Link>
+          <Link href="/store" style={{ textDecoration: 'none' }}><Button variant="primary">{c('home.hero.cta1')}</Button></Link>
+          <Link href="/blog" style={{ textDecoration: 'none' }}><Button variant="secondary">{c('home.hero.cta2')}</Button></Link>
         </div>
       </section>
 
@@ -74,7 +87,7 @@ export function HomeView() {
       <section style={{ marginBottom: 64 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 15, fontWeight: 600, color: 'var(--paper)', margin: 0 }}>
-            Manifest
+            {c('home.manifest.heading')}
           </h2>
           <span style={{ fontSize: 12, color: 'var(--ash)', fontFamily: 'var(--font-mono)' }}>updated live</span>
         </div>
@@ -102,14 +115,8 @@ export function HomeView() {
         </Panel>
 
         <div style={{ marginTop: 16, display: 'flex', gap: 18, flexWrap: 'wrap', fontSize: 13 }}>
-          <span style={{ color: 'var(--ash)' }}>Also here:</span>
-          {[
-            { href: '/trove', label: 'TroveAgent' },
-            { href: '/tools', label: 'WhiteHat Tools' },
-            { href: '/radio', label: 'Radio' },
-            { href: '/play', label: 'Snake' },
-            { href: '/browser', label: 'Browser' },
-          ].map(l => (
+          <span style={{ color: 'var(--ash)' }}>{c('home.alsohere.label')}</span>
+          {ALSO_HERE.map(l => (
             <Link key={l.href} href={l.href} style={{ color: 'var(--paper)', textDecoration: 'none', borderBottom: '1px solid var(--iron)' }}>
               {l.label}
             </Link>
@@ -122,7 +129,7 @@ export function HomeView() {
         <section>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 16 }}>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 15, fontWeight: 600, color: 'var(--paper)', margin: 0 }}>
-              Latest from the build log
+              {c('home.blog.heading')}
             </h2>
             <Link href="/blog" style={{ fontSize: 13, color: 'var(--ash)', textDecoration: 'none' }}>View all →</Link>
           </div>

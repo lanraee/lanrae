@@ -144,7 +144,7 @@ export function RadioView() {
 
   return (
     <PageShell>
-      <PageHeading kicker="Music" heading="Radio" subheading="Live internet radio, or a playlist — your call." />
+      <PageHeading kicker={c('radio.kicker')} heading={c('radio.heading')} subheading={c('radio.subheading')} />
 
       <div style={{ display: 'flex', gap: 4, marginBottom: 20, borderBottom: '1px solid var(--iron)' }}>
         {(['radio', 'spotify'] as const).map(t => (

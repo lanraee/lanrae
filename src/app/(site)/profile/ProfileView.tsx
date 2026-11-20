@@ -219,7 +219,7 @@ export function ProfileView() {
   if (stage === 'login') {
     return (
       <PageShell>
-        <PageHeading heading="Sign in" subheading="Sign in with the email tied to your membership." />
+        <PageHeading heading={c('profile.login.heading')} subheading={c('profile.login.subheading')} />
         <Panel style={{ maxWidth: 400 }}>
           <form onSubmit={submitLogin} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>

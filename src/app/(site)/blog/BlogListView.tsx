@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useContent } from '@/lib/useContent';
 
 type Post = {
   id: string;
@@ -19,6 +20,7 @@ type Post = {
 const CATEGORIES = ['all', 'tutorial', 'devlog', 'guide', 'video'];
 
 export function BlogListView() {
+  const { c } = useContent();
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
@@ -45,12 +47,12 @@ export function BlogListView() {
     <div style={{ minHeight: '100vh', background: 'var(--ink)', color: 'var(--paper)', fontFamily: 'var(--font-body)' }}>
       {/* hero */}
       <div style={{ padding: '56px 24px 36px', maxWidth: 1040, margin: '0 auto' }}>
-        <div style={{ fontSize: 13.5, color: 'var(--ash)', marginBottom: 12, fontWeight: 500 }}>Tutorials &amp; build log</div>
+        <div style={{ fontSize: 13.5, color: 'var(--ash)', marginBottom: 12, fontWeight: 500 }}>{c('blog.kicker')}</div>
         <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(28px, 5vw, 44px)', lineHeight: 1.15, marginBottom: 14, color: 'var(--paper)' }}>
-          Build things. Share what you learn.
+          {c('blog.heading')}
         </h1>
         <p style={{ fontSize: 16, color: 'var(--ash)', maxWidth: '52ch', lineHeight: 1.6 }}>
-          Tutorials, devlogs, and guides from building real things — networking, AI, dev tools, and more.
+          {c('blog.subheading')}
         </p>
       </div>
 

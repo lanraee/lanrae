@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useContent } from '@/lib/useContent';
 import { PageShell, PageHeading, Panel } from '@/components/ui';
 
 const BOOKMARKS = [
@@ -130,9 +131,10 @@ function BrowserApp() {
 }
 
 export function BrowserView() {
+  const { c } = useContent();
   return (
     <PageShell>
-      <PageHeading kicker="Bookmarks" heading="Browser" subheading="A small in-page browser with a few favourites." />
+      <PageHeading kicker={c('browser.kicker')} heading={c('browser.heading')} subheading={c('browser.subheading')} />
       <BrowserApp />
     </PageShell>
   );

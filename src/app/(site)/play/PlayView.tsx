@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useContent } from '@/lib/useContent';
 import { PageShell, PageHeading, Mono } from '@/components/ui';
 
 function SnakeGame() {
@@ -115,9 +116,10 @@ function SnakeGame() {
 }
 
 export function PlayView() {
+  const { c } = useContent();
   return (
     <PageShell>
-      <PageHeading kicker="Classic Nokia" heading="Snake" subheading="A quick break. Arrow keys, WASD, or the D-pad." />
+      <PageHeading kicker={c('play.kicker')} heading={c('play.heading')} subheading={c('play.subheading')} />
       <SnakeGame />
     </PageShell>
   );

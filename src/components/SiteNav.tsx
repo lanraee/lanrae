@@ -4,30 +4,32 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-
-const PRIMARY: { href: string; label: string; desc?: string }[] = [
-  { href: '/store', label: 'Store' },
-  { href: '/members', label: 'Members' },
-  { href: '/blog', label: 'Blog' },
-];
-
-const MORE = [
-  { href: '/fans', label: 'Fans', desc: 'Leaderboard of top supporters' },
-  { href: '/request', label: 'Request a build', desc: 'Pitch what gets built next' },
-  { href: '/support', label: 'Support', desc: 'Send a one-off tip' },
-  { href: '/about', label: 'About', desc: 'Who’s building this' },
-  { href: '/trove', label: 'TroveAgent', desc: 'AI build assistant' },
-  { href: '/tools', label: 'WhiteHat Tools', desc: 'OSINT & security directory' },
-  { href: '/radio', label: 'Radio', desc: 'Live radio + playlist' },
-  { href: '/play', label: 'Snake', desc: 'A quick break' },
-  { href: '/browser', label: 'Browser', desc: 'Bookmarked links' },
-];
+import { useContent } from '@/lib/useContent';
 
 export function SiteNav() {
+  const { c } = useContent();
   const pathname = usePathname();
   const [moreOpen, setMoreOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
+
+  const PRIMARY: { href: string; label: string; desc?: string }[] = [
+    { href: '/store', label: c('nav.store.label') },
+    { href: '/members', label: c('nav.members.label') },
+    { href: '/blog', label: c('nav.blog.label') },
+  ];
+
+  const MORE = [
+    { href: '/fans', label: c('nav.fans.label'), desc: c('nav.fans.desc') },
+    { href: '/request', label: c('nav.request.label'), desc: c('nav.request.desc') },
+    { href: '/support', label: c('nav.support.label'), desc: c('nav.support.desc') },
+    { href: '/about', label: c('nav.about.label'), desc: c('nav.about.desc') },
+    { href: '/trove', label: c('nav.trove.label'), desc: c('nav.trove.desc') },
+    { href: '/tools', label: c('nav.tools.label'), desc: c('nav.tools.desc') },
+    { href: '/radio', label: c('nav.radio.label'), desc: c('nav.radio.desc') },
+    { href: '/play', label: c('nav.play.label'), desc: c('nav.play.desc') },
+    { href: '/browser', label: c('nav.browser.label'), desc: c('nav.browser.desc') },
+  ];
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
@@ -51,7 +53,7 @@ export function SiteNav() {
       fontFamily: 'var(--font-body)',
     }}>
       <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 9, textDecoration: 'none', flexShrink: 0 }}>
-        <Image src="/logo.png" alt="lanrae" width={26} height={26} style={{ borderRadius: 6 }} />
+        <Image src={c('site.logoUrl') || '/logo.png'} alt="lanrae" width={26} height={26} style={{ borderRadius: 6 }} />
         <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 16, color: 'var(--paper)', letterSpacing: '-.01em' }}>
           lanrae
         </span>

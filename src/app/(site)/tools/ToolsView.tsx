@@ -1,3 +1,6 @@
+'use client';
+
+import { useContent } from '@/lib/useContent';
 import { PageShell, PageHeading, Panel, Row } from '@/components/ui';
 
 const TOOLS = [
@@ -63,17 +66,18 @@ const CAT_COLOR: Record<string, string> = {
 const CATEGORIES = ['Anonymity', 'Identity', 'Intel', 'People', 'Search', 'CSE', 'Geo'];
 
 export function ToolsView() {
+  const { c } = useContent();
   return (
     <PageShell>
       <PageHeading
-        kicker="OSINT4ALL · Recon tools"
-        heading="WhiteHat Tools"
-        subheading="A curated directory of OSINT, anonymity, and reconnaissance tools."
+        kicker={c('tools.kicker')}
+        heading={c('tools.heading')}
+        subheading={c('tools.subheading')}
       />
 
       <Panel style={{ marginBottom: 32, borderLeft: '2px solid var(--beacon)' }}>
         <p style={{ fontSize: 13.5, color: 'var(--ash)', margin: 0, lineHeight: 1.6 }}>
-          Educational and research use only. These tools are linked for learning OSINT and security research — use them within the law and with consent.
+          {c('tools.notice')}
         </p>
       </Panel>
 

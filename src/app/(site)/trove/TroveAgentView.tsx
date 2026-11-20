@@ -52,9 +52,7 @@ function renderBlocks(text: string, mono = false) {
 export function TroveAgentView() {
   const { c } = useContent();
   const [tab, setTab] = useState<'chat' | 'terminal'>('chat');
-  const [chatMsgs, setChatMsgs] = useState<{ role: 'user' | 'assistant'; text: string }[]>([
-    { role: 'assistant', text: "Hi! I'm TroveAgent — your AI design & development assistant. Ask me about UI/UX, branding, typography, colour systems, code, or anything else." },
-  ]);
+  const [chatMsgs, setChatMsgs] = useState<{ role: 'user' | 'assistant'; text: string }[]>([]);
   const [termLines, setTermLines] = useState<{ type: 'cmd' | 'out'; text: string }[]>([
     { type: 'out', text: 'TroveAgent Terminal  —  claude-code mode\nType a command or describe what you need built.\n' },
   ]);
@@ -183,12 +181,12 @@ export function TroveAgentView() {
 
   return (
     <PageShell>
-      <Kicker>{c('win.troveagent.subtitle') || 'AI build assistant'}</Kicker>
+      <Kicker>{c('trove.kicker')}</Kicker>
       <h1 style={{
         fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(28px, 4.2vw, 38px)',
         margin: '0 0 24px', color: 'var(--paper)',
       }}>
-        {c('win.troveagent.title') || 'TroveAgent'}
+        {c('trove.heading')}
       </h1>
 
       <Panel style={{ padding: 0, overflow: 'hidden' }}>
@@ -204,6 +202,14 @@ export function TroveAgentView() {
           {tab === 'chat' && (
             <>
               <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 8 }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                  <div style={{
+                    maxWidth: '82%', background: 'var(--ink)', border: '1px solid var(--iron)',
+                    borderRadius: 3, padding: '10px 14px', fontSize: 13.5, color: 'var(--paper)', lineHeight: 1.55,
+                  }}>
+                    {c('trove.welcome')}
+                  </div>
+                </div>
                 {chatMsgs.map((m, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
                     <div style={{

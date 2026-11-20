@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { VoicePlayer } from '@/components/VoicePlayer';
+import { CONTENT_DEFAULTS } from '@/lib/contentDefaults';
 
 type Product = {
   id: string; name: string; description: string; icon: string | null;
@@ -162,27 +163,37 @@ function ProductForm({ product, onSave, onCancel }: {
 }
 
 const CONTENT_KEYS = [
-  { section: 'Window Titles', fields: [
-    { key: 'win.store.title',   label: 'Store — title' },
-    { key: 'win.store.subtitle', label: 'Store — subtitle' },
-    { key: 'win.fans.title',    label: 'Fans — title' },
-    { key: 'win.fans.subtitle', label: 'Fans — subtitle' },
-    { key: 'win.members.title', label: 'Members — title' },
-    { key: 'win.members.subtitle', label: 'Members — subtitle' },
-    { key: 'win.request.title', label: 'Request — title' },
-    { key: 'win.request.subtitle', label: 'Request — subtitle' },
-    { key: 'win.donate.title',  label: 'Support — title' },
-    { key: 'win.donate.subtitle', label: 'Support — subtitle' },
-    { key: 'win.about.title',   label: 'About — title' },
-    { key: 'win.about.subtitle', label: 'About — subtitle' },
+  { section: 'Home', fields: [
+    { key: 'home.hero.heading', label: 'Hero heading' },
+    { key: 'home.hero.body', label: 'Hero body', type: 'textarea' },
+    { key: 'home.hero.cta1', label: 'Primary button label' },
+    { key: 'home.hero.cta2', label: 'Secondary button label' },
+    { key: 'home.manifest.heading', label: 'Manifest section heading' },
+    { key: 'home.manifest.store.desc', label: 'Manifest row — Store description' },
+    { key: 'home.manifest.members.desc', label: 'Manifest row — Members description' },
+    { key: 'home.manifest.fans.desc', label: 'Manifest row — Fans description' },
+    { key: 'home.manifest.request.desc', label: 'Manifest row — Request description' },
+    { key: 'home.manifest.support.desc', label: 'Manifest row — Support description' },
+    { key: 'home.manifest.about.desc', label: 'Manifest row — About description' },
+    { key: 'home.alsohere.label', label: '"Also here" label' },
+    { key: 'home.blog.heading', label: 'Blog preview heading' },
   ]},
-  { section: 'Apps', fields: [
-    { key: 'app.store.icon', label: 'Store icon', type: 'emoji' },   { key: 'app.store.label', label: 'Store label' },
-    { key: 'app.members.icon', label: 'Members icon', type: 'emoji' }, { key: 'app.members.label', label: 'Members label' },
-    { key: 'app.fans.icon', label: 'Fans icon', type: 'emoji' },     { key: 'app.fans.label', label: 'Fans label' },
-    { key: 'app.request.icon', label: 'Request icon', type: 'emoji' }, { key: 'app.request.label', label: 'Request label' },
-    { key: 'app.donate.icon', label: 'Support icon', type: 'emoji' }, { key: 'app.donate.label', label: 'Support label' },
-    { key: 'app.about.icon', label: 'About icon', type: 'emoji' },   { key: 'app.about.label', label: 'About label' },
+  { section: 'Navigation', fields: [
+    { key: 'nav.store.label', label: 'Store label' },
+    { key: 'nav.members.label', label: 'Members label' },
+    { key: 'nav.blog.label', label: 'Blog label' },
+    { key: 'nav.fans.label', label: 'Fans label' },         { key: 'nav.fans.desc', label: 'Fans description' },
+    { key: 'nav.request.label', label: 'Request label' },   { key: 'nav.request.desc', label: 'Request description' },
+    { key: 'nav.support.label', label: 'Support label' },   { key: 'nav.support.desc', label: 'Support description' },
+    { key: 'nav.about.label', label: 'About label' },       { key: 'nav.about.desc', label: 'About description' },
+    { key: 'nav.trove.label', label: 'TroveAgent label' },  { key: 'nav.trove.desc', label: 'TroveAgent description' },
+    { key: 'nav.tools.label', label: 'WhiteHat Tools label' }, { key: 'nav.tools.desc', label: 'WhiteHat Tools description' },
+    { key: 'nav.radio.label', label: 'Radio label' },       { key: 'nav.radio.desc', label: 'Radio description' },
+    { key: 'nav.play.label', label: 'Snake label' },        { key: 'nav.play.desc', label: 'Snake description' },
+    { key: 'nav.browser.label', label: 'Browser label' },   { key: 'nav.browser.desc', label: 'Browser description' },
+  ]},
+  { section: 'Footer', fields: [
+    { key: 'footer.tagline', label: 'Tagline' },
   ]},
   { section: 'Store', fields: [
     { key: 'store.label', label: 'Section tag' },
@@ -213,49 +224,45 @@ const CONTENT_KEYS = [
     { key: 'about.heading', label: 'Heading' },
     { key: 'about.body', label: 'Body text', type: 'textarea' },
   ]},
-  { section: 'Mobile Bottom Bar', fields: [
-    { key: 'app.dock.ios', label: 'iOS dock (comma-separated app IDs)' },
-    { key: 'app.dock.android', label: 'Android nav (comma-separated app IDs)' },
+  { section: 'Member Profile', fields: [
+    { key: 'profile.login.heading', label: 'Sign-in heading' },
+    { key: 'profile.login.subheading', label: 'Sign-in subheading' },
+  ]},
+  { section: 'TroveAgent', fields: [
+    { key: 'trove.kicker', label: 'Kicker' },
+    { key: 'trove.heading', label: 'Heading' },
+    { key: 'trove.welcome', label: 'Welcome message', type: 'textarea' },
+  ]},
+  { section: 'WhiteHat Tools', fields: [
+    { key: 'tools.kicker', label: 'Kicker' },
+    { key: 'tools.heading', label: 'Heading' },
+    { key: 'tools.subheading', label: 'Subheading' },
+    { key: 'tools.notice', label: 'Notice banner', type: 'textarea' },
+  ]},
+  { section: 'Snake', fields: [
+    { key: 'play.kicker', label: 'Kicker' },
+    { key: 'play.heading', label: 'Heading' },
+    { key: 'play.subheading', label: 'Subheading' },
+  ]},
+  { section: 'Browser', fields: [
+    { key: 'browser.kicker', label: 'Kicker' },
+    { key: 'browser.heading', label: 'Heading' },
+    { key: 'browser.subheading', label: 'Subheading' },
+  ]},
+  { section: 'Radio', fields: [
+    { key: 'radio.kicker', label: 'Kicker' },
+    { key: 'radio.heading', label: 'Heading' },
+    { key: 'radio.subheading', label: 'Subheading' },
+  ]},
+  { section: 'Blog', fields: [
+    { key: 'blog.kicker', label: 'Kicker' },
+    { key: 'blog.heading', label: 'Heading' },
+    { key: 'blog.subheading', label: 'Subheading', type: 'textarea' },
   ]},
   { section: 'Spotify', fields: [
     { key: 'spotify.embedUrl', label: 'Embed URL (open.spotify.com/embed/…)', type: 'textarea' },
   ]},
 ];
-
-const CONTENT_DEFAULTS: Record<string, string> = {
-  'app.store.icon': '🛍️',   'app.store.label': 'Store',
-  'app.members.icon': '🪪', 'app.members.label': 'Members',
-  'app.fans.icon': '🏆',    'app.fans.label': 'Fans',
-  'app.request.icon': '💡', 'app.request.label': 'Request',
-  'app.donate.icon': '💛',  'app.donate.label': 'Support',
-  'app.about.icon': 'ℹ️',   'app.about.label': 'About',
-  'store.label': 'Featured · Engineered for SI',
-  'store.heading': 'Ship-ready SI products',
-  'store.subheading': 'Own them outright, or unlock the full shelf with an Insider membership.',
-  'fans.label': 'Hall of fame',
-  'fans.heading': 'The people funding the future',
-  'fans.subheading': 'Ranked by total support. Resets monthly.',
-  'members.label': 'Join the studio',
-  'members.heading': 'Back the build. Get the perks.',
-  'members.subheading': 'Members fund what gets built next and top supporters get their name on the wall.',
-  'request.label': 'Build with me',
-  'request.heading': 'Request a project',
-  'request.subheading': 'Got an idea? Tell me what you want built — top-voted requests shape the roadmap.',
-  'donate.label': 'One-off tip',
-  'donate.heading': 'Buy me a GPU hour ☕',
-  'donate.subheading': 'Every tip goes straight into building the next product.',
-  'about.heading': 'lanrae · SI Product Engineer',
-  'about.body': 'I engineer products for the Super Intelligence era — systems that reason, act, and compound capability, not just features bolted onto a chat window. I design, build, and ship them end to end, then launch them here, on a desktop you can actually drive. lanrae.co.uk is the studio, the storefront, and the changelog, all in one.',
-  'app.dock.ios': 'store,spotify,safari,profile',
-  'app.dock.android': 'store,spotify,edge,profile',
-  'spotify.embedUrl': 'https://open.spotify.com/embed/playlist/5lKfoFXeyYe3aJCOvmubp9?utm_source=generator&si=ea24e6827ef144de',
-  'win.store.title': 'Product Store',    'win.store.subtitle': '— SI, engineered by lanrae',
-  'win.fans.title': 'Top 10 Fans',       'win.fans.subtitle': '— this month',
-  'win.members.title': 'Membership',     'win.members.subtitle': '',
-  'win.request.title': 'Request a Project', 'win.request.subtitle': '— shape the roadmap',
-  'win.donate.title': 'Support the work','win.donate.subtitle': '',
-  'win.about.title': 'About',            'win.about.subtitle': '',
-};
 
 const DEFAULT_APP_ORDER = [
   { id: 'store',       icon: '🛍️', label: 'Store',          gradient: 'linear-gradient(160deg,#7c6cff,#3a1d6e)' },
@@ -1067,6 +1074,64 @@ export default function AdminPage() {
                         </div>
                       );
                     })}
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* Homepage Hero Slider */}
+            {(() => {
+              const key = 'home.hero.slides';
+              const raw = contentEdits[key] ?? siteContent[key] ?? '[]';
+              let slides: { url: string; caption?: string }[] = [];
+              try {
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed)) slides = parsed;
+              } catch {}
+
+              const updateSlides = (next: typeof slides) => {
+                setContentEdits(prev => ({ ...prev, [key]: JSON.stringify(next) }));
+              };
+              const fieldStyle: React.CSSProperties = {
+                background: 'rgba(255,255,255,.04)', border: '1px solid var(--stroke)',
+                borderRadius: 8, padding: '9px 11px', fontSize: 13, color: '#eef1fb',
+                fontFamily: 'inherit', width: '100%', boxSizing: 'border-box', outline: 'none',
+              };
+              const smallBtn: React.CSSProperties = {
+                background: 'rgba(255,255,255,.06)', border: '1px solid var(--stroke)', borderRadius: 6,
+                color: '#a7aecb', width: 26, height: 26, fontSize: 12, cursor: 'pointer', fontFamily: 'inherit',
+              };
+
+              return (
+                <div style={{ marginBottom: 28 }}>
+                  <h3 style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.2px', color: '#9d90ff', marginBottom: 6, paddingBottom: 8, borderBottom: '1px solid var(--stroke-2)' }}>Homepage Hero Slider</h3>
+                  <p style={{ fontSize: 12, color: '#7d84a6', margin: '0 0 14px' }}>Images shown in a rotating banner at the top of the homepage. Leave empty to hide it.</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    {slides.map((s, i) => (
+                      <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', background: 'rgba(255,255,255,.03)', border: '1px solid var(--stroke)', borderRadius: 8, padding: 10 }}>
+                        {s.url && (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={s.url} alt="" style={{ width: 56, height: 56, objectFit: 'cover', borderRadius: 6, flexShrink: 0, background: 'rgba(255,255,255,.05)' }} />
+                        )}
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0 }}>
+                          <input placeholder="Image URL" value={s.url}
+                            onChange={e => { const next = [...slides]; next[i] = { ...next[i], url: e.target.value }; updateSlides(next); }}
+                            style={fieldStyle} />
+                          <input placeholder="Caption (optional)" value={s.caption ?? ''}
+                            onChange={e => { const next = [...slides]; next[i] = { ...next[i], caption: e.target.value }; updateSlides(next); }}
+                            style={fieldStyle} />
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flexShrink: 0 }}>
+                          <button onClick={() => { if (i === 0) return; const next = [...slides]; [next[i - 1], next[i]] = [next[i], next[i - 1]]; updateSlides(next); }} disabled={i === 0} title="Move up" style={{ ...smallBtn, opacity: i === 0 ? .4 : 1 }}>↑</button>
+                          <button onClick={() => { if (i === slides.length - 1) return; const next = [...slides]; [next[i + 1], next[i]] = [next[i], next[i + 1]]; updateSlides(next); }} disabled={i === slides.length - 1} title="Move down" style={{ ...smallBtn, opacity: i === slides.length - 1 ? .4 : 1 }}>↓</button>
+                          <button onClick={() => updateSlides(slides.filter((_, j) => j !== i))} title="Remove" style={{ ...smallBtn, color: '#ff6b6b' }}>✕</button>
+                        </div>
+                      </div>
+                    ))}
+                    <button onClick={() => updateSlides([...slides, { url: '', caption: '' }])}
+                      style={{ alignSelf: 'flex-start', background: 'rgba(157,144,255,.12)', border: '1px solid rgba(157,144,255,.3)', color: '#9d90ff', borderRadius: 8, padding: '8px 14px', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
+                      + Add slide
+                    </button>
                   </div>
                 </div>
               );
